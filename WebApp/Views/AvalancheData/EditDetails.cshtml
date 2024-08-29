@@ -1,0 +1,113 @@
+﻿@model WebApp.Models.UpdateDetailsViewModel
+
+@{
+    ViewData["Title"] = "Редактировать данные о лавинах";
+}
+
+@functions {
+    string FormatValue(decimal? value)
+    {
+        if (value == 0)
+        {
+            return "0";
+        }
+        return value?.ToString("G29") ?? "";
+    }
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>@Model.Region.RegionName - Месяц @Model.UpdateCombinedData.First().Month</h3>
+
+<form asp-action="EditDetails" method="post" class="form-horizontal">
+    <input type="hidden" asp-for="Region.RegionId" />
+    <input type="hidden" asp-for="Region.RegionName" value="@Model.Region.RegionName" />
+
+    <div class="card-deck">
+        @for (int i = 0; i < Model.UpdateCombinedData.Count; i++)
+        {
+            <div class="card mb-3">
+                <div class="card-header">
+                    <strong>День <input asp-for="@Model.UpdateCombinedData[i].Day" class="form-control d-inline-block w-auto" style="width: 60px;" /></strong>
+                </div>
+                <div class="card-body">
+                    <input type="hidden" asp-for="@Model.UpdateCombinedData[i].DataId" />
+
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].Month" class="control-label">Месяц</label>
+                        <input asp-for="@Model.UpdateCombinedData[i].Month" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].AirTemperatureMorning" class="control-label">Температура утром</label>
+                        <div class="input-group">
+                            <input asp-for="@Model.UpdateCombinedData[i].AirTemperatureMorning" class="form-control" value="@FormatValue(Model.UpdateCombinedData[i].AirTemperatureMorning)" />
+                            <div class="input-group-append">
+                                <span class="input-group-text">°C</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].SnowDepthAverageMorning" class="control-label">Снежный покров утром</label>
+                        <input asp-for="@Model.UpdateCombinedData[i].SnowDepthAverageMorning" class="form-control" value="@FormatValue(Model.UpdateCombinedData[i].SnowDepthAverageMorning)" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].SnowDepthMaxMorning" class="control-label">Макс. снежный покров утром</label>
+                        <input asp-for="@Model.UpdateCombinedData[i].SnowDepthMaxMorning" class="form-control" value="@FormatValue(Model.UpdateCombinedData[i].SnowDepthMaxMorning)" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].WeatherMorning" class="control-label">Погода утром</label>
+                        <input asp-for="@Model.UpdateCombinedData[i].WeatherMorning" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].AirTemperatureEvening" class="control-label">Температура вечером</label>
+                        <div class="input-group">
+                            <input asp-for="@Model.UpdateCombinedData[i].AirTemperatureEvening" class="form-control" value="@FormatValue(Model.UpdateCombinedData[i].AirTemperatureEvening)" />
+                            <div class="input-group-append">
+                                <span class="input-group-text">°C</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].SnowDepthAverageEvening" class="control-label">Снежный покров вечером</label>
+                        <input asp-for="@Model.UpdateCombinedData[i].SnowDepthAverageEvening" class="form-control" value="@FormatValue(Model.UpdateCombinedData[i].SnowDepthAverageEvening)" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].SnowDepthMaxEvening" class="control-label">Макс. снежный покров вечером</label>
+                        <input asp-for="@Model.UpdateCombinedData[i].SnowDepthMaxEvening" class="form-control" value="@FormatValue(Model.UpdateCombinedData[i].SnowDepthMaxEvening)" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].WeatherEvening" class="control-label">Погода вечером</label>
+                        <input asp-for="@Model.UpdateCombinedData[i].WeatherEvening" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].AverageTemperatureDay" class="control-label">Средняя температура за день</label>
+                        <input asp-for="@Model.UpdateCombinedData[i].AverageTemperatureDay" class="form-control" value="@FormatValue(Model.UpdateCombinedData[i].AverageTemperatureDay)" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].AverageTemperatureDecade" class="control-label">Средняя температура за декаду</label>
+                        <input asp-for="@Model.UpdateCombinedData[i].AverageTemperatureDecade" class="form-control" value="@FormatValue(Model.UpdateCombinedData[i].AverageTemperatureDecade)" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].Precipitation" class="control-label">Осадки</label>
+                        <input asp-for="@Model.UpdateCombinedData[i].Precipitation" class="form-control" value="@FormatValue(Model.UpdateCombinedData[i].Precipitation)" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.UpdateCombinedData[i].AdditionalInfo" class="control-label">Доп. информация</label>
+                        <input asp-for="@Model.UpdateCombinedData[i].AdditionalInfo" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        <a asp-controller="Region" asp-action="Details" asp-route-id="@Model.Region.RegionId" class="btn btn-secondary">Назад к деталям региона</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

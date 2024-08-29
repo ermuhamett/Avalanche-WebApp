@@ -1,0 +1,36 @@
+﻿@model IEnumerable<WebApp.Models.Region>
+
+@{
+    ViewData["Title"] = "Список регионов";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Добавить регион</a>
+    <form asp-action="DeleteAll" method="post" style="display:inline;">
+        <button type="submit" class="btn btn-danger">Удалить все данные</button>
+    </form>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Регион</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.RegionName</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.RegionId" class="btn btn-primary">Детали</a>
+                    <a asp-action="Edit" asp-route-id="@item.RegionId" class="btn btn-warning">Обновить</a>
+                    <a asp-action="Delete" asp-route-id="@item.RegionId" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

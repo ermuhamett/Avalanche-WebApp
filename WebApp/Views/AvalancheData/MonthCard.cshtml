@@ -1,0 +1,22 @@
+﻿@model WebApp.Models.RegionDetailsViewModel
+
+@{
+    ViewData["Title"] = "Детали региона";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>@Model.Region.RegionName</h3>
+
+<div class="row">
+    @for (int month = 1; month <= 12; month++)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <a asp-action="EditDetails" asp-controller="AvalancheData" asp-route-regionId="@Model.Region.RegionId" asp-route-month="@month">Месяц @month</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,120 @@
+﻿@model WebApp.Models.AvalancheData
+
+@{
+    ViewData["Title"] = "Добавить новую запись";
+}
+
+<h2>Добавить новую запись</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="RegionId" class="control-label">Регион</label>
+                <select asp-for="RegionId" class="form-control" asp-items="ViewBag.Regions"></select>
+                <span asp-validation-for="RegionId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Month" class="control-label">Месяц</label>
+                <input asp-for="Month" class="form-control" />
+                <span asp-validation-for="Month" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Day" class="control-label">День</label>
+                <input asp-for="Day" class="form-control" />
+                <span asp-validation-for="Day" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AirTemperatureMorning" class="control-label">Температура утро</label>
+                <input asp-for="AirTemperatureMorning" class="form-control" />
+                <span asp-validation-for="AirTemperatureMorning" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SnowDepthAverageMorning" class="control-label">Снег утро (средний)</label>
+                <input asp-for="SnowDepthAverageMorning" class="form-control" />
+                <span asp-validation-for="SnowDepthAverageMorning" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SnowDepthMaxMorning" class="control-label">Снег утро (макс)</label>
+                <input asp-for="SnowDepthMaxMorning" class="form-control" />
+                <span asp-validation-for="SnowDepthMaxMorning" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="WeatherMorning" class="control-label">Погода утро</label>
+                <input asp-for="WeatherMorning" class="form-control" />
+                <span asp-validation-for="WeatherMorning" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AirTemperatureEvening" class="control-label">Температура вечер</label>
+                <input asp-for="AirTemperatureEvening" class="form-control" />
+                <span asp-validation-for="AirTemperatureEvening" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SnowDepthAverageEvening" class="control-label">Снег вечер (средний)</label>
+                <input asp-for="SnowDepthAverageEvening" class="form-control" />
+                <span asp-validation-for="SnowDepthAverageEvening" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SnowDepthMaxEvening" class="control-label">Снег вечер (макс)</label>
+                <input asp-for="SnowDepthMaxEvening" class="form-control" />
+                <span asp-validation-for="SnowDepthMaxEvening" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="WeatherEvening" class="control-label">Погода вечер</label>
+                <input asp-for="WeatherEvening" class="form-control" />
+                <span asp-validation-for="WeatherEvening" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AverageTemperatureDay" class="control-label">Температура воздуха средняя, град (сут)</label>
+                <input asp-for="AverageTemperatureDay" class="form-control" />
+                <span asp-validation-for="AverageTemperatureDay" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AverageTemperatureDecade" class="control-label">Температура воздуха средняя, град (декада)</label>
+                <input asp-for="AverageTemperatureDecade" class="form-control" />
+                <span asp-validation-for="AverageTemperatureDecade" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Precipitation" class="control-label">Осадки</label>
+                <input asp-for="Precipitation" class="form-control" />
+                <span asp-validation-for="Precipitation" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AdditionalInfo" class="control-label">Доп. информация</label>
+                <input asp-for="AdditionalInfo" class="form-control" />
+                <span asp-validation-for="AdditionalInfo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Назад к списку</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

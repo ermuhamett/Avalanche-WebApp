@@ -1,0 +1,59 @@
+﻿@model WebApp.Models.RegionDetailsViewModel
+
+@{
+    ViewData["Title"] = "Редактировать данные о лавинах";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>@Model.Region.RegionName</h3>
+
+<form asp-action="EditDetails" method="post">
+    <input type="hidden" asp-for="Region.RegionId" />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Месяц</th>
+                <th>День</th>
+                <th>Температура утром</th>
+                <th>Снежный покров утром</th>
+                <th>Макс. снежный покров утром</th>
+                <th>Погода утром</th>
+                <th>Температура вечером</th>
+                <th>Снежный покров вечером</th>
+                <th>Макс. снежный покров вечером</th>
+                <th>Погода вечером</th>
+                <th>Средняя температура за день</th>
+                <th>Средняя температура за декаду</th>
+                <th>Осадки</th>
+                <th>Доп. информация</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.CombinedData.Count; i++)
+            {
+                <tr>
+                    <td><input asp-for="@Model.CombinedData[i].Month" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].Day" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].AirTemperatureMorning" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].SnowDepthAverageMorning" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].SnowDepthMaxMorning" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].WeatherMorning" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].AirTemperatureEvening" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].SnowDepthAverageEvening" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].SnowDepthMaxEvening" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].WeatherEvening" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].AverageTemperatureDay" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].AverageTemperatureDecade" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].Precipitation" class="form-control" /></td>
+                    <td><input asp-for="@Model.CombinedData[i].AdditionalInfo" class="form-control" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+</form>
+
+<a asp-action="Details" asp-controller="Region" asp-route-id="@Model.Region.RegionId" class="btn btn-secondary">Назад к деталям региона</a>

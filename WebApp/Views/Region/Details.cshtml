@@ -1,0 +1,67 @@
+﻿@model WebApp.Models.RegionDetailsWithFilter
+
+@{
+    ViewData["Title"] = "Детали региона";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>@Model.Region.RegionName</h3>
+
+<a asp-action="MonthCard" asp-controller="AvalancheData" asp-route-regionId="@Model.Region.RegionId" class="btn btn-primary">Редактировать данные о лавинах</a>
+
+<form asp-action="FilterByMonth" method="post" class="form-inline">
+    <input type="hidden" name="regionId" value="@Model.Region.RegionId" />
+    <select name="selectedMonth" class="form-control">
+        <option value="0">Все месяцы</option>
+        @foreach (var month in Model.Months)
+        {
+            <option value="@month.Value" selected="@(month.Value == Model.SelectedMonth.ToString() ? "selected" : null)">@month.Text</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-primary ml-2">Фильтровать</button>
+</form>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Месяц</th>
+            <th>День</th>
+            <th>Температура утром</th>
+            <th>Снежный покров утром</th>
+            <th>Макс. снежный покров утром</th>
+            <th>Погода утром</th>
+            <th>Температура вечером</th>
+            <th>Снежный покров вечером</th>
+            <th>Макс. снежный покров вечером</th>
+            <th>Погода вечером</th>
+            <th>Средняя температура за день</th>
+            <th>Средняя температура за декаду</th>
+            <th>Осадки</th>
+            <th>Доп. информация</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CombinedData)
+        {
+            <tr>
+                <td>@item.Month</td>
+                <td>@item.Day</td>
+                <td>@item.AirTemperatureMorning</td>
+                <td>@item.SnowDepthAverageMorning</td>
+                <td>@item.SnowDepthMaxMorning</td>
+                <td>@item.WeatherMorning</td>
+                <td>@item.AirTemperatureEvening</td>
+                <td>@item.SnowDepthAverageEvening</td>
+                <td>@item.SnowDepthMaxEvening</td>
+                <td>@item.WeatherEvening</td>
+                <td>@item.AverageTemperatureDay</td>
+                <td>@item.AverageTemperatureDecade</td>
+                <td>@item.Precipitation</td>
+                <td>@item.AdditionalInfo</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Назад к списку регионов</a>

@@ -1,0 +1,33 @@
+﻿@model WebApp.Models.UploadViewModel
+
+@{
+    ViewData["Title"] = "Загрузить данные из Excel";
+}
+
+<h2>Загрузить данные из Excel</h2>
+
+<form asp-controller="Region" asp-action="Upload" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Выберите Excel файл:</label>
+        <input type="file" class="form-control" id="file" name="File" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Загрузить</button>
+</form>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Назад к списку регионов</a>
+</div>
+
+
+@*<form asp-action="Upload" asp-controller="Upload" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="file">Выберите файл:</label>
+        <input type="file" name="file" />
+    </div>
+    <button type="submit">Загрузить</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p>
+}*@
